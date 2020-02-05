@@ -32,7 +32,7 @@ export class FormLoginComponent implements OnInit {
     this._msgLogout = null;
     this._msgEnviarE = null;
     if (this.usuario.email == "" || this.usuario.senha == "" || this.usuario.email == null || this.usuario.senha == null) {
-      this._msgEnviarE = "Preencha todos os campos";
+      this._msgEnviarE = "Preencha todos os campos!";
     }
     else {
       //Globals.USUARIO = this.usuario;
@@ -44,7 +44,7 @@ export class FormLoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
         error => {
-          this._msgEnviarE = "Email e/ou senha inválido(s)";
+          this._msgEnviarE = "Email e/ou senha inválido(s)!";
           this.usuario.email = "";
           this.usuario.senha = "";
           this.router.navigate(['login']);

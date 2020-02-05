@@ -1,7 +1,12 @@
 *{
     margin:0%;
     padding:0%;
-}  
+} 
+.capa{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+} 
 #menuLatEsq{
     margin-left: 1%;
 }
@@ -48,6 +53,7 @@
     margin-left:1.5%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+
 } .card{
     width: 100%;
     height: 350px;
@@ -148,39 +154,47 @@ img{
 .estilizaModal p{
     color:rgb(167, 167, 167);
 }
-.icon .col{
+.vertical-menu{
+    margin-left: 15px;
+    margin-top: 45px;
+}
+.collapse .col{
     margin:5%;
     padding:5% ;
 }
-.icon img{
+.collapse img{
     width:55%;
     height:55%;
     margin:auto;
 }
-.icon h4{
+.collapse h4{
     color:#059faa;
 }
-.icon .btn{
+.collapse .btn{
     background-color:transparent;
     border-color: transparent;
 }
-.icon .card{
+.collapse .card{
     width: 100%;
+    height: 100%;
 }
-.icon  input{
+.collapse .card-body{
+    width: 100%;
+    height: 100%;
+}
+.collapse  input{
     display:none;
     width:7%;
     margin:3%;
-   
 }
-.icon label{
+.collapse label{
     padding-left: 35px;
     margin-top:4%;
     color:#059faa;
     display:block;
     position: relative;
 }
-.icon label::before{
+.collapse label::before{
     content:"";
     width:23px;
     height:23px;
@@ -192,7 +206,7 @@ img{
     left:0;
     top:-1.5px;
 }
-.icon label::after{
+.collapse label::after{
     content:"";
     width:17px;
     height:17px;
@@ -207,4 +221,40 @@ img{
 input:checked + label::after{
     background-color: #059faa;
 }
+input {
 
+}
+
+/*VERTICAL MENU*/
+.vertical-menu {
+    width: 200px;
+  }
+  
+  .vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+  
+  .vertical-menu a:hover {
+    background-color: #ccc;
+  }
+  
+  .vertical-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  h3, h5{
+    border: solid 1px #dedcc5;
+    line-height: 36px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-weight: bold;
+    color: #dedcc5;
+    background-color: #059faa;
+    margin-top: 45px;
+    width: 90%;
+    margin-right: 5%;
+}

@@ -27,6 +27,11 @@ import { FormFaqComponent } from './faq/form-faq/form-faq.component';
 import { CadProdutoComponent } from './produto/cad-produto/cad-produto.component';
 import { EditaProdutoComponent } from './produto/edita-produto/edita-produto.component';
 import { CadOngComponent } from './login/cad-ong/cad-ong.component';
+import { DoarComponent } from './doar/doar.component';
+import { DoarCasaumComponent } from './doar/doar-casaum/doar-casaum.component';
+import { DoarNovamulherComponent } from './doar/doar-novamulher/doar-novamulher.component';
+import { DoarAparelhaComponent } from './doar/doar-aparelha/doar-aparelha.component';
+import { MeuVaralComponent } from './meu-varal/meu-varal.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +58,11 @@ import { CadOngComponent } from './login/cad-ong/cad-ong.component';
     CadProdutoComponent,
     EditaProdutoComponent,
     CadOngComponent,
+    DoarComponent,
+    DoarCasaumComponent,
+    DoarNovamulherComponent,
+    DoarAparelhaComponent,
+    MeuVaralComponent
   ],
   imports: [
     BrowserModule,
