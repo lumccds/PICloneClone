@@ -1,112 +1,112 @@
 <div class="container-fluid">
-    <div class="row mt-4">
-        <div class="col-md-1">
+  <div class="row">
+    <div class="col-md-12 p-4 mt-2 d-flex justify-content-end">
+      <div class="input-group ">
+        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2"
+          placeholder=" O que deseja pesquisar?" [(ngModel)]="palavraChave">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary " type="button" id="button-addon2" (click)="pesquisar();">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
-        <div class="col-md-10">
-            <img src="https://images.pexels.com/photos/1036856/pexels-photo-1036856.jpeg?cs=srgb&dl=photo-of-black-clothes-on-hangers-1036856.jpg&fm=jpg"
-                alt="" class="capa">
-        </div>
-        <div class="col-md-1">
-        </div>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="vertical-menu">
-                <a data-toggle="collapse" href="#collapseExample0" role="button" aria-expanded="false"
-                    aria-controls="collapseExample">Tamanho</a>
-                <div class="collapse" id="collapseExample0">
-                    <div class="card card-body">
-                        <input type="checkbox" id="PP">
-                        <label for="PP">PP</label>
-                        <input type="checkbox" id="P">
-                        <label for="P">P</label>
-                        <input type="checkbox" id="M">
-                        <label for="M">M</label>
-                        <input type="checkbox" id="G">
-                        <label for="G">G</label>
-                        <input type="checkbox" id="GG">
-                        <label for="GG">GG</label>
-                        <input type="checkbox" id="XG">
-                        <label for="XG">XG</label>
-                        <input type="checkbox" id="XXG">
-                        <label for="XXG">XXG</label>
-                        <input type="checkbox" id="UNICO">
-                        <label for="UNICO">Único</label>
-                    </div>
-                </div>
-                <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false"
-                    aria-controls="collapseExample">Condição</a>
-                <div class="collapse" id="collapseExample1">
-                    <div class="card card-body">
-                        <input type="checkbox" id="NOVO">
-                        <label for="NOVO">NOVO</label>
-                        <input type="checkbox" id="SEMI-NOVO">
-                        <label for="SEMI-NOVO">SEMI-NOVO</label>
-                        <input type="checkbox" id="USADO">
-                        <label for="USADO">USADO</label>
-                    </div>
-                </div>
-                <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
-                    aria-controls="collapseExample">Seção</a>
-                <div class="collapse" id="collapseExample2">
-                    <div class="card card-body">
-                        <input type="checkbox" id="INFANTIL">
-                        <label for="INFANTIL">INFANTIL</label>
-                        <input type="checkbox" id="ADULTO">
-                        <label for="ADULTO">ADULTO</label>
-                    </div>
-                </div>
-                <a data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
-                    aria-controls="collapseExample">Categoria</a>
-                <div class="collapse" id="collapseExample3">
-                    <div class="card card-body">
-                        <input type="checkbox" id="CALÇA">
-                        <label for="CALÇA">CALÇA</label>
-                        <input type="checkbox" id="MOLETOM">
-                        <label for="MOLETOM">MOLETOM</label>
-                        <input type="checkbox" id="VESTIDO">
-                        <label for="VESTIDO">VESTIDO</label>
-                        <input type="checkbox" id="BLUSA">
-                        <label for="BLUSA">BLUSA</label>
-                        <input type="checkbox" id="CROPPED">
-                        <label for="CROPPED">CROPPED</label>
-                        <input type="checkbox" id="CASACO">
-                        <label for="CASACO">CASACO</label>
-                        <input type="checkbox" id="CAMISA">
-                        <label for="CAMISA">CAMISA</label>
-                        <input type="checkbox" id="PIJAMA">
-                        <label for="PIJAMA">PIJAMA</label>
-                        <input type="checkbox" id="SAIA">
-                        <label for="SAIA">SAIA</label>
-                        <input type="checkbox" id="BERMUDA">
-                        <label for="BERMUDA">BERMUDA</label>
-                        <input type="checkbox" id="SHORT">
-                        <label for="SHORT">SHORT</label>
-                        <input type="checkbox" id="JAQUETA">
-                        <label for="JAQUETA">JAQUETA</label>
-                        <input type="checkbox" id="MACACAO">
-                        <label for="MACACAO">MACACÃO</label>
-                        <input type="checkbox" id="JARDINEIRA">
-                        <label for="JARDINEIRA">JARDINEIRA</label>
-                        <input type="checkbox" id="POLO">
-                        <label for="POLO">POLO</label>
-                    </div>
-                </div>
-            </div>
+  </div>
+</div>
+
+
+<div *ngIf="lista == true">
+  <div class="row teste">
+
+
+
+    <div class="col-md-3 col-sm-6" *ngFor="let busca of idproduto">
+      <div class="product-grid6">
+        <div class="product-image6">
+          <img class="pic-1" src="{{busca.linkFoto}}">
         </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-11">
-                    <h3 class="produtos mb-4 mx-auto">produtos</h3>
+        <ul class="social ">
+          <li><a data-toggle="modal" data-target=".bd-example-modal-lg" (click)="atribuiModal(busca.idProduto);"
+              data-tip="Veja melhor"><i class="fa fa-search"></i></a></li>
+          <li><a [routerLink]="'/cestadetrocas'" data-tip="Trocar"><i class="fa fa-shopping-bag"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Estrura modal-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row ">
+          <div class="col-md-7 pr-2">
+            <img class="img-fluid" src="{{prodModal.linkFoto }}">
+          </div>
+          <div class="col-md-5 pl-1">
+
+
+            <div class="row mb-3 infoUser">
+              <div class="col-md-12 ">
+                <h3>{{prodModal.nome}}</h3>
+                <p><strong>{{prodModal.status}}</strong></p>
+                <p>ID do Produto: {{prodModal.idProduto }}</p>
+
+                <!-- <p>ID do proprietário: {{prodModal.usuario.idUsuario}}</p> -->
+
+
+
+              </div>
+              <div class="row mt-3 detalhesUser">
+                <div class="col-md-12">
+                  <p>Informações adicionais: {{prodModal.detalhes }}</p>
                 </div>
-                <div class="col-md-1"></div>
+              </div>
+
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                </div>
+
+            <div class="row  estilizaModal">
+              <div class="col-md-2 mr-2">
+                <p>Tamanho: &nbsp;{{prodModal.tamanho}} </p>
+              </div>
+              <div class="col-md-3 ">
+                <p>Condição: &nbsp;&nbsp;{{prodModal.condicao}} </p>
+              </div>
+              <div class="col-md-3 ">
+                <p>Classificação: {{prodModal.classificacao}} </p>
+              </div>
+              <div class="col-md-3">
+                <p>Categoria: {{prodModal.categoria}} </p>
+              </div>
             </div>
+
+
+            <div class="row mt-5">
+              <div class="col-md-12">
+                <button type="button" [routerLink]="'/cestadetrocas'" class="btn  mt-auto p-2"
+                  data-dismiss="modal">Trocar</button>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
         </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Fim estrutura modal-->

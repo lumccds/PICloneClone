@@ -1,5 +1,7 @@
+import { Usuario } from './Usuario';
+
 export class Produto{
-    id: number;
+    idProduto: number;
     nome: String;
     linkFoto: String;
     detalhes: String;
@@ -7,4 +9,6 @@ export class Produto{
     classificacao: String = "Selecione";
     condicao: String = "Selecione";
     tamanho: String = "Selecione";
+    status:String = "DISPONÍVEL";
+    usuario:Usuario;
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WebListServiceService } from '../service/web-list-service.service';
+import { Usuario } from '../model/Usuario';
+import { GlobalsUsuario } from '../model/GlobalsUsuario';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -8,23 +11,50 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  login: String = "";
+  user: Usuario = new Usuario();
+  constructor(private srv: WebListServiceService, private router: Router) { }
 
-  private login: String = "";
-  constructor(private srv: WebListServiceService) { }
-
-  log:boolean;
+  log: boolean;
+  ok: string;
 
   ngOnInit() {
-    this.srv.log.subscribe(value => {
-      this.log = value;
-    });
+
+    this.srv.buscarInfo(localStorage.getItem("TOKEN")).subscribe(
+      (res: Usuario) => {
+        GlobalsUsuario.usuario = res;
+        this.user = res;
+      },
+      (err) => {
+        this.user = null;
+      }
+    );
+
+    this.srv.BuscaDetalhesProd(localStorage.getItem("TOKEN")).subscribe(
+      (res: Usuario) => {
+        GlobalsUsuario.usuario = res;
+        this.user = res;
+      },
+      (err) => {
+        this.user.idUsuario = null;
+      }
+    );
   }
 
-  logout(){
+  logout() {
     this.srv.log.next(false);
+    localStorage.removeItem("TOKEN");
+    localStorage.clear();
+
     $('#logout').click();
+
+    this.user = null;
+
   }
-  Login(){
-    this.srv.log.next(true);
+  Login() {
+    if (localStorage.getItem("TOKEN")) {
+      this.srv.log.next(true);
+    }
+
   }
 }

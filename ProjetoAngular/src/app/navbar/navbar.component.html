@@ -1,6 +1,6 @@
-<!-- <div class="col-md-12" (window.onload)=mudalogin()> -->
+<div class="col-md-12" (window.onload)=mudalogin()>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand tamanho" href="#"><img src="../../assets/imagensSobre/Cópia de Comud moda.png"
+        <a class="navbar-brand tamanho img-fluid" href="#"><img src="../../assets/imagensSobre/Cópia de Comud moda.png"
                 id="logo"></a>
         <button class=" navbar-toggler" id="buttonCollapse" type="button" data-toggle="collapse"
             data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false"
@@ -8,33 +8,31 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+<<<<<<< HEAD
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" [routerLink]="'/home'">Início <span class="sr-only">(página
+                    <a class="nav-link text-white" [routerLink]="'/home'">Home <span class="sr-only">(página
                             atual)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" [routerLink]="'/sobre'">Sobre</a>
+                    <a class="nav-link text-white" [routerLink]="'/sobre'">About</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link text-white" [routerLink]="'/contatos'">Contact</a>
-                </li> -->
                 <li class="nav-item active">
-                    <a class="nav-link text-white" [routerLink]="'/produto'">Produtos</a>
+                    <a class="nav-link text-white" [routerLink]="'/produto'">Products</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" [routerLink]="'/login'" *ngIf="!log">Login</a>
-                    <a class="nav-link text-white " id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" (click)="Login()" *ngIf="log">
-                        meu varal
+                    <a class="nav-link text-white" [routerLink]="'/login'" *ngIf="user.idUsuario == null">Login</a>
+                    <a class="nav-link text-white" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" (click)="Login()" *ngIf="user.idUsuario != null">
+                        {{user.nome}}
                     </a>
                     <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Minhas Publicações</a>
-                        <a class="dropdown-item" href="#">Notificações</a>
-                        <a class="dropdown-item" [routerLink]="'/cadastroproduto'">Cadastre seu produto</a>
-                        <a class="dropdown-item" href="#">Dados de Cadastro </a>
+                        <a class="dropdown-item disabled">Meu ID de Usuário: <b>{{user.idUsuario}}</b></a>
+                        <a class="dropdown-item" [routerLink]="'/cadastroproduto'">Cadastrar meu Produto</a>
+                        <a class="dropdown-item" [routerLink]="['/editausuario', user.idUsuario]">Atualizar meu
+                            Cadastro </a>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" id="logout" [routerLink]="'/login'"
                             (click)="logout()">Logout</button>
@@ -42,9 +40,54 @@
                 </li>
             </ul>
             <img id="faq" src="../../assets/faq-icon3.png" alt="FAQ" [routerLink]="'/faq'">
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline my-2 my-sm-0" type="submit" [routerLink]="'/doar'">Doar</button>
-            </form>
         </div>
     </nav>
-<!-- </div> -->
+</div>
+=======
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" [routerLink]="'/home'">Home<span class="sr-only">(página
+                                atual)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" [routerLink]="'/sobre'">About</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-white" [routerLink]="'/contatos'">Contact</a>
+                    </li> -->
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" [routerLink]="'/produto'">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" [routerLink]="'/login'" *ngIf="user.idUsuario == null">Login</a>
+                        <a class="nav-link text-white " id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" (click)="Login()" *ngIf="user.idUsuario != null">
+                            {{user.nome}}
+                        </a>
+                        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item disabled" >Meu ID de Usuário: {{user.idUsuario}}</a>
+                            <a class="dropdown-item" [routerLink]="'/cadastroproduto'">Cadastrar meu Produto</a>
+                            <a class="dropdown-item" [routerLink]="['/editausuario', user.idUsuario]">Atualizar meu
+                                Cadastro </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" id="logout" [routerLink]="'/login'"
+                                (click)="logout()">Logout</button>
+                        </div>
+                    </li>
+                </ul>
+                <img id="faq" src="../../assets/faq-icon3.png" alt="FAQ" [routerLink]="'/faq'">
+                <!-- <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline my-2 my-sm-0" [routerLink]="'/cestadedoacao'"
+                        type="submit">Doar</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline my-2 my-sm-0" id="troca" [routerLink]="'/cestadetrocas'"
+                        type="submit">Trocar</button>
+                </form> -->
+            </div>
+        </nav>
+    </div>
+</header>
+>>>>>>> fcf77cd8ccb5cf446372c144ece686aacb04d9c8

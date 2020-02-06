@@ -1,2 +1,2 @@
-# PICloneClone
-clone pq buggou tudo
+# ProjetoIntegrador
+Projeto Integrador _ e-commerce COMUD

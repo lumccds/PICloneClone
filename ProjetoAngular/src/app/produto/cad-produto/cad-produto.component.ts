@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { WebListServiceService } from '../../service/web-list-service.service';
 import { Router } from '@angular/router';
 import { Produto } from 'src/app/model/Produto';
+import { Usuario } from '../../model/Usuario';
+import { GlobalsUsuario } from '../../model/GlobalsUsuario';
 
 @Component({
   selector: 'app-cad-produto',
@@ -10,7 +12,12 @@ import { Produto } from 'src/app/model/Produto';
 })
 export class CadProdutoComponent implements OnInit {
   produto: Produto = new Produto;
-  private filtro: any = /^([a-zA-zà-úÀ-Ú]|\s+)+$/;
+  user: Usuario = new Usuario;
+  userParse: Usuario = new Usuario;
+
+
+
+  filtro: any = /^([a-zA-zà-úÀ-Ú]|\s+)+$/;
   _msgErroN = null;
   _msgErroF = null;
   _msgErroT = null;
@@ -19,6 +26,7 @@ export class CadProdutoComponent implements OnInit {
   _msgErroCO = null;
   _msgErroD = null;
   _msgEnviar = null;
+  _msgErro = null;
 
   constructor(private srv: WebListServiceService, private router: Router) { }
 
@@ -27,6 +35,19 @@ export class CadProdutoComponent implements OnInit {
       alert("Você não pode acessar está página sem estar logado")
       this.router.navigate(['/login']);
     }
+
+    this.srv.BuscaDetalhesProd(localStorage.getItem("TOKEN")).subscribe(
+      (res: Usuario) => {
+        GlobalsUsuario.usuario = res;
+        this.user = res;
+
+        this.userParse.idUsuario = this.user.idUsuario;
+        this.produto.usuario = this.userParse;
+      },
+      (err) => {
+        this.user = null;
+      }
+    );
   }
 
   validacao() {
@@ -34,31 +55,31 @@ export class CadProdutoComponent implements OnInit {
       alert("Preencha todos os campos");
     }
 
-    if(this.produto.tamanho == "Selecione"){
+    if (this.produto.tamanho == "Selecione") {
       this._msgErroT = "Escolha uma opção";
     }
-    else{
+    else {
       this._msgErroT = null;
     }
 
-    if(this.produto.condicao == "Selecione"){
+    if (this.produto.condicao == "Selecione") {
       this._msgErroCO = "Escolha uma opção";
     }
-    else{
+    else {
       this._msgErroCO = null;
     }
 
-    if(this.produto.classificacao == "Selecione"){
+    if (this.produto.classificacao == "Selecione") {
       this._msgErroCL = "Escolha uma opção";
     }
-    else{
+    else {
       this._msgErroCL = null;
     }
 
-    if(this.produto.categoria == "Selecione"){
+    if (this.produto.categoria == "Selecione") {
       this._msgErroCA = "Escolha uma opção";
     }
-    else{
+    else {
       this._msgErroCA = null;
     }
 
@@ -69,7 +90,7 @@ export class CadProdutoComponent implements OnInit {
     else {
       this._msgErroN = null;
     }
-    
+
     if (this.produto.linkFoto.indexOf(".") < 2) {
       this.produto.linkFoto = "";
       this._msgErroF = "URL inválida";
@@ -79,7 +100,7 @@ export class CadProdutoComponent implements OnInit {
     }
 
     if (this.produto.nome != "" && this.produto.linkFoto != "" && this.produto.detalhes != "" && this.produto.categoria != "Selecione" && this.produto.tamanho != "Selecione" && this.produto.classificacao != "Selecione" && this.produto.condicao) {
-      this.srv.inserirp(this.produto).subscribe((res)=>{
+      this.srv.inserirp(this.produto).subscribe((res) => {
         this._msgEnviar = "Dados enviados com SUCESSO!!";
         this.produto.nome = "";
         this.produto.linkFoto = "";
@@ -88,21 +109,23 @@ export class CadProdutoComponent implements OnInit {
         this.produto.categoria = "Selecione";
         this.produto.classificacao = "Selecione";
         this.produto.condicao = "Selecione";
+        this.router.navigate(['/produto']);
       },
-      (error)=>{
-        this._msgEnviar = "Erro ao enviar dados!!";
-        this.produto.nome = "";
-        this.produto.linkFoto = "";
-        this.produto.detalhes = "";
-        this.produto.tamanho = "Selecione";
-        this.produto.categoria = "Selecione";
-        this.produto.classificacao = "Selecione";
-        this.produto.condicao = "Selecione";
-      })
+        (error) => {
+          this._msgErro = "Erro ao enviar dados!!";
+          this.produto.nome = "";
+          this.produto.linkFoto = "";
+          this.produto.detalhes = "";
+          this.produto.tamanho = "Selecione";
+          this.produto.categoria = "Selecione";
+          this.produto.classificacao = "Selecione";
+          this.produto.condicao = "Selecione";
+        })
     }
   }
 
-  limpaEnviar(){
+  limpaEnviar() {
     this._msgEnviar = null;
+    this._msgErro = null;
   }
 }

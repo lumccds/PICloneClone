@@ -13,16 +13,17 @@ import { Token } from 'src/app/model/Token';
 })
 export class FormLoginComponent implements OnInit {
 
-  public usuario: Usuario = new Usuario;
-  private _msgEnviarE: string = null;
-  private _msgLogout: string = null;
+  usuario: Usuario = new Usuario;
+  _msgEnviarE: string = null;
+  _msgLogout: string = null;
 
   constructor(private srv: WebListServiceService, private router: Router) { }
 
   ngOnInit() {
     if (localStorage.getItem("TOKEN")) {
-      localStorage.removeItem("TOKEN");
-      localStorage.clear();
+      this.router.navigate(['home']);
+    }
+    else {
       Globals.nome = undefined;
       this._msgLogout = "Usuário desconectado!";
     }
@@ -32,19 +33,18 @@ export class FormLoginComponent implements OnInit {
     this._msgLogout = null;
     this._msgEnviarE = null;
     if (this.usuario.email == "" || this.usuario.senha == "" || this.usuario.email == null || this.usuario.senha == null) {
-      this._msgEnviarE = "Preencha todos os campos!";
+      this._msgEnviarE = "Preencha todos os campos";
     }
     else {
-      //Globals.USUARIO = this.usuario;
       this.srv.login(this.usuario).subscribe((res: Token) => {
         localStorage.setItem("TOKEN", res.token);
         localStorage.setItem("nome", res.nome);
         localStorage.setItem("email", res.email);
         this.srv.log.next(true);
-        this.router.navigate(['home']);
+        window.location.reload();
       },
         error => {
-          this._msgEnviarE = "Email e/ou senha inválido(s)!";
+          this._msgEnviarE = "Email e/ou senha inválido(s)";
           this.usuario.email = "";
           this.usuario.senha = "";
           this.router.navigate(['login']);

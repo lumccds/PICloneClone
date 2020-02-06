@@ -21,6 +21,7 @@ export class ProdutoComponent implements OnInit {
   public lista: boolean;
   public _msgErro: string = null;
   public id:number;
+  public palavraChave:String;
 
   constructor(private produtoBusca: WebListServiceService,private router:Router) { }
 
@@ -54,17 +55,25 @@ export class ProdutoComponent implements OnInit {
     }
 
   public pesquisar() {
-    if (this.idbusca == null) {
-      this._msgErro = "Digite algum termo de busca";
+    if (this.palavraChave == null) {
+      this._msgErro = "";
+      this.lista = true
+      this.produtoBusca.obterLista().subscribe((resultado: Produto[]) => {
+        this.idproduto = resultado
+        this.idbusca = null;
+      })
     }
     else {
-      this._msgErro = "";
-      this.lista = false
-      this.produtoBusca.buscaDetProd(this.idbusca).subscribe((resultado: Produto) => {
-        this._idproduto = resultado;
-        this.idbusca = null;
+      this.produtoBusca.buscaPalavraChave(this.palavraChave).subscribe((res: Produto[]) => {
 
-      })
+        this.idproduto = res;
+        console.log(this.idproduto);
+        this.palavraChave = null;
+      
+    },
+    (error)=>{
+     console.log("não encontrou")
+    });
     }
   }
 
